@@ -1,6 +1,6 @@
 module github.com/itaysk/kubectl-neat
 
-go 1.17
+go 1.20
 
 require (
 	github.com/ghodss/yaml v1.0.0
@@ -9,13 +9,12 @@ require (
 	github.com/spf13/cobra v1.1.1
 	github.com/tidwall/gjson v1.9.3
 	github.com/tidwall/sjson v1.0.4
+	k8s.io/api v0.21.14
 	k8s.io/apimachinery v0.21.14
 	k8s.io/client-go v0.21.14
-	k8s.io/kubernetes v1.21.14
 )
 
 require (
-	github.com/docker/distribution v2.7.1+incompatible // indirect
 	github.com/go-logr/logr v0.4.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/google/go-cmp v0.5.5 // indirect
@@ -24,7 +23,6 @@ require (
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect
-	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.0 // indirect
@@ -33,11 +31,7 @@ require (
 	golang.org/x/text v0.3.6 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	k8s.io/api v0.21.14 // indirect
-	k8s.io/apiserver v0.21.14 // indirect
-	k8s.io/component-base v0.21.14 // indirect
 	k8s.io/klog/v2 v2.9.0 // indirect
-	k8s.io/utils v0.0.0-20211116205334-6203023598ed // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.1 // indirect
 	sigs.k8s.io/yaml v1.2.0 // indirect
 )
