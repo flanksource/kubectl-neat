@@ -26,6 +26,7 @@ import (
 
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/util/intstr"
 
 	//  Import the crypto sha256 algorithm for the docker image parser to work
@@ -35,6 +36,83 @@ import (
 
 	dockerref "github.com/distribution/reference"
 )
+
+// GroupName is the group name use in this package
+const GroupName = ""
+
+// SchemeGroupVersion is group version used to register these objects
+var SchemeGroupVersion = schema.GroupVersion{Group: GroupName, Version: "v1"}
+
+// Kind takes an unqualified kind and returns a Group qualified GroupKind
+func Kind(kind string) schema.GroupKind {
+	return SchemeGroupVersion.WithKind(kind).GroupKind()
+}
+
+// Resource takes an unqualified resource and returns a Group qualified GroupResource
+func Resource(resource string) schema.GroupResource {
+	return SchemeGroupVersion.WithResource(resource).GroupResource()
+}
+
+var (
+	// SchemeBuilder object to register various known types
+	SchemeBuilder = runtime.NewSchemeBuilder(addKnownTypes)
+
+	// AddToScheme represents a func that can be used to apply all the registered
+	// funcs in a scheme
+	AddToScheme = SchemeBuilder.AddToScheme
+)
+
+func addKnownTypes(scheme *runtime.Scheme) error {
+
+	scheme.AddKnownTypes(SchemeGroupVersion,
+		&v1.Pod{},
+		&v1.PodList{},
+		&v1.PodStatusResult{},
+		&v1.PodTemplate{},
+		&v1.PodTemplateList{},
+		&v1.ReplicationControllerList{},
+		&v1.ReplicationController{},
+		&v1.ServiceList{},
+		&v1.Service{},
+		&v1.ServiceProxyOptions{},
+		&v1.NodeList{},
+		&v1.Node{},
+		&v1.NodeProxyOptions{},
+		&v1.Endpoints{},
+		&v1.EndpointsList{},
+		&v1.Binding{},
+		&v1.Event{},
+		&v1.EventList{},
+		&v1.List{},
+		&v1.LimitRange{},
+		&v1.LimitRangeList{},
+		&v1.ResourceQuota{},
+		&v1.ResourceQuotaList{},
+		&v1.Namespace{},
+		&v1.NamespaceList{},
+		&v1.ServiceAccount{},
+		&v1.ServiceAccountList{},
+		&v1.Secret{},
+		&v1.SecretList{},
+		&v1.PersistentVolume{},
+		&v1.PersistentVolumeList{},
+		&v1.PersistentVolumeClaim{},
+		&v1.PersistentVolumeClaimList{},
+		&v1.PodAttachOptions{},
+		&v1.PodLogOptions{},
+		&v1.PodExecOptions{},
+		&v1.PodPortForwardOptions{},
+		&v1.PodProxyOptions{},
+		&v1.ComponentStatus{},
+		&v1.ComponentStatusList{},
+		&v1.SerializedReference{},
+		&v1.RangeAllocation{},
+		&v1.ConfigMap{},
+		&v1.ConfigMapList{},
+	)
+
+	return nil
+}
 
 func addDefaultingFuncs(scheme *runtime.Scheme) error {
 	return RegisterDefaults(scheme)
