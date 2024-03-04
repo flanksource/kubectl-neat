@@ -31,6 +31,20 @@ func NeatDefaults(in string) (string, error) {
 	if !specJSON.Exists() {
 		return in, nil
 	}
+
+	metadataPathsToDelete := []string{
+		`metadata.annotations.config\.kubernetes\.io/origin`,
+		`metadata.labels.kustomize\.toolkit\.fluxcd\.io/name`,
+		`metadata.labels.kustomize\.toolkit\.fluxcd\.io/namespace`,
+	}
+	for _, k := range metadataPathsToDelete {
+		in, err = sjson.Delete(in, k)
+		if err != nil {
+			log.Error(fmt.Errorf("error deleting metadata '%s' : %v", k, err))
+			continue
+		}
+	}
+
 	pathsToDelete, err := flatMapJSON(specJSON.String(), "spec.")
 	if err != nil {
 		return "", fmt.Errorf("error flattening json : %v", err)
