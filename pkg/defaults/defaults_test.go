@@ -311,13 +311,22 @@ func TestNeatDefault(t *testing.T) {
 			}`,
 		},
 		{
-			title: "RestartPolicy",
+			title: "RestartPolicy with kustomize metadata",
 			data: `{
 				"apiVersion": "v1",
 				"kind": "Pod",
 				"metadata": {
 					"name": "myapp",
-					"namespace": "default"
+					"namespace": "default",
+                    "annotations": {
+                        "aws-annotation": "aws-annotation-value",
+                        "config.kubernetes.io/origin": "path: file"
+                    },
+                    "labels": {
+                        "app": "myapp",
+                        "kustomize.toolkit.fluxcd.io/name": "k-name",
+                        "kustomize.toolkit.fluxcd.io/namespace": "k-namespace"
+                    }
 				},
 				"spec": {
 					"restartPolicy": "Always",
@@ -334,7 +343,13 @@ func TestNeatDefault(t *testing.T) {
 				"kind": "Pod",
 				"metadata": {
 					"name": "myapp",
-					"namespace": "default"
+					"namespace": "default",
+                    "annotations": {
+                        "aws-annotation": "aws-annotation-value"
+                    },
+                    "labels": {
+                        "app": "myapp"
+                    }
 				},
 				"spec": {
 					"containers": [
