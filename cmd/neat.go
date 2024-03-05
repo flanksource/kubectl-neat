@@ -101,6 +101,19 @@ func neatMetadata(in string) (string, error) {
 	if err != nil {
 		return in, fmt.Errorf("error deleting last-applied-configuration : %v", err)
 	}
+
+	metadataPathsToDelete := []string{
+		`metadata.annotations.config\.kubernetes\.io/origin`,
+		`metadata.labels.kustomize\.toolkit\.fluxcd\.io/name`,
+		`metadata.labels.kustomize\.toolkit\.fluxcd\.io/namespace`,
+	}
+	for _, k := range metadataPathsToDelete {
+		in, err = sjson.Delete(in, k)
+		if err != nil {
+			return in, fmt.Errorf("error deleting metadata '%s' : %v", k, err)
+		}
+	}
+
 	// TODO: prettify this. gjson's @pretty is ok but setRaw the pretty code gives unwanted result
 	newMeta := gjson.Get(in, "{metadata.name,metadata.namespace,metadata.labels,metadata.annotations}")
 	in, err = sjson.Set(in, "metadata", newMeta.Value())
