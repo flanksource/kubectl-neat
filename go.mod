@@ -1,12 +1,12 @@
 module github.com/flanksource/kubectl-neat
 
-go 1.20
+go 1.25.0
 
 require (
 	github.com/distribution/reference v0.5.0
 	github.com/ghodss/yaml v1.0.0
 	github.com/jeremywohl/flatten v0.0.0-20180923035001-588fe0d4c603
-	github.com/sirupsen/logrus v1.9.0
+	github.com/sirupsen/logrus v1.9.1
 	github.com/spf13/cobra v1.7.0
 	github.com/tidwall/gjson v1.9.3
 	github.com/tidwall/sjson v1.0.4
@@ -27,9 +27,9 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
 	github.com/tidwall/pretty v1.2.0 // indirect
-	golang.org/x/net v0.13.0 // indirect
-	golang.org/x/sys v0.10.0 // indirect
-	golang.org/x/text v0.11.0 // indirect
+	golang.org/x/net v0.55.0 // indirect
+	golang.org/x/sys v0.45.0 // indirect
+	golang.org/x/text v0.37.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	k8s.io/klog/v2 v2.100.1 // indirect
